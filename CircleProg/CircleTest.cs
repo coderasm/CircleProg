@@ -2,37 +2,86 @@
 
 public class CircleTest
 {
-    public static void Main(string[] args)
+  public static void PointTests()
+  {
+    Circle circle = new Circle(0, 0, 2);
+    Point point = new Point();
+    int[,] points = { {0, 2 }, { 1, 0 }, { 0, -3 } };
+    for (int i = 0; i < points.GetLength(0); i++)
     {
-        Circle c1 = new Circle(0, 0, 1), c2 = new Circle(1, 0, 1);
-        Point p1 = new Point();
-        p1.setPoint(0, 1);
-
-        p1.print();
-        Console.Write(", ");
-        c1.print();
+      point.setPoint(points[i,0], points[i, 1]);
+      point.print();
+      Console.Write(", ");
+      circle.print();
+      Console.WriteLine();
+      if (circle.onCircle(point))
+      {
+        // Console.Write(" Point ");
+        point.print();
+        Console.Write(" on ");
+        circle.print();
         Console.WriteLine();
-        if (c1.onCircle(p1))
-        {
-           // Console.Write(" Point ");
-            p1.print();
-            Console.Write (" on ");
-            c1.print();
-            Console.WriteLine();
-        }
-        else
-            Console.WriteLine("Point NOT on circle");
-
-        if (c1.intersect(c2))
-        {
-           // Console.WriteLine("Two circles intersect");
-            c1.print();
-            Console.Write(" intersects ");
-            c2.print();
-            Console.WriteLine();
-        }
-        else
-
-            Console.WriteLine("Two circles do NOT intersect");
+      }
+      else if (circle.inCircle(point))
+      {
+        // Console.Write(" Point ");
+        point.print();
+        Console.Write(" in ");
+        circle.print();
+        Console.WriteLine();
+      }
+      else if (circle.outsideCircle(point))
+      {
+        // Console.Write(" Point ");
+        point.print();
+        Console.Write(" outside ");
+        circle.print();
+        Console.WriteLine();
+      }
     }
+  }
+
+  public static void CircleTests()
+  {
+    Circle mainCircle = new Circle(0, 0, 2);
+    Circle[] circlesToCompare = { new Circle(0, 1, 2 ), new Circle( 0, 1, 1), new Circle( 0, 3, 1), new Circle( 4, 0, 1 ), new Circle( 0, 0, 1 ) };
+    for (int i = 0; i < circlesToCompare.Length; i++)
+    {
+      if (mainCircle.intersect(circlesToCompare[i]))
+      {
+        mainCircle.print();
+        Console.Write(" intersects ");
+        circlesToCompare[i].print();
+        Console.WriteLine();
+      }
+      if (mainCircle.tangenOutside(circlesToCompare[i]))
+      {
+        circlesToCompare[i].print();
+        Console.Write(" outside and tangent to ");
+        mainCircle.print();
+        Console.WriteLine();
+      }
+      if (mainCircle.tangentInside(circlesToCompare[i]))
+      {
+        circlesToCompare[i].print();
+        Console.Write(" inside and tangent to ");
+        mainCircle.print();
+        Console.WriteLine();
+      }
+      if (mainCircle.disjoint(circlesToCompare[i]))
+      {
+        mainCircle.print();
+        Console.Write(" disjoint to ");
+        circlesToCompare[i].print();
+        Console.WriteLine();
+      }
+      if (mainCircle.contains(circlesToCompare[i]))
+      {
+        mainCircle.print();
+        Console.Write(" contains ");
+        circlesToCompare[i].print();
+        Console.WriteLine();
+      }
+    }
+  }
 }

@@ -10,7 +10,9 @@ namespace CircleProg
   {
     static void Main(string[] args)
     {
-      
+      CircleTest.PointTests();
+      CircleTest.CircleTests();
+      Console.ReadKey();
     }
   }
 }
